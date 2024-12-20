@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -15,4 +16,16 @@
 
 .linear_right {
     @apply bg-gradient-to-r from-black to-transparent
+}
+
+.custom_navigation .swiper-button-prev, .custom_navigation .swiper-button-next {
+    @apply text-white after:text-xl bg-black/30 rounded-md transition duration-500 hover:bg-main
+}
+
+.custom_navigation .swiper-button-prev {
+    @apply after:content-['prev']
+}
+
+.custom_navigation .swiper-button-next {
+    @apply after:content-['next']
 }

@@ -1,8 +1,9 @@
+import React from "react";
 import {Game, Genre} from "@/types/games";
 // Icons
 import {FaStar} from "react-icons/fa";
-import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export const BannerComponent = ({game}: { game: Game }) => {
     return (
@@ -12,12 +13,8 @@ export const BannerComponent = ({game}: { game: Game }) => {
                 <div className="absolute w-full h-full linear_right"></div>
                 <div className="h-full container">
                     <div className="relative h-full flex flex-col items-start justify-center gap-7">
-                        <div className="flex items-center gap-3">
-                            {game?.genres.map((genre: Genre, index: number) =>
-                                <span key={index} className="text-2xl text-main">
-                                    {genre.name}
-                                </span>
-                            )}
+                        <div className="text-2xl text-main flex items-center gap-3">
+                            {game?.genres.map((genre: Genre) => genre?.name).join(', ')}
                         </div>
                         <Link href={`/games/${game?.slug}`} className="text-6xl font-semibold transition duration-500 hover:text-main">
                             {game?.name}
@@ -40,6 +37,33 @@ export const BannerComponent = ({game}: { game: Game }) => {
                             buy now
                         </Link>
                     </div>
+                </div>
+            </div>
+        </>
+    )
+}
+
+export const PopularCard = ({game}: { game: Game }) => {
+    console.log(game)
+    return (
+        Object.keys(game).length &&
+        <>
+            <div className="rounded-lg mb-8">
+                <Link href={`/games/${game?.slug}`} className={`relative block w-full h-36`}>
+                    <Image src={game.background_image} fill={true} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" alt={game.name}/>
+                </Link>
+                <div className="mt-5">
+                    <Link href={`/games/${game?.slug}`} className="block min-h-14 text-lg transition duration-500 hover:text-main mb-3">
+                        {game?.name}
+                    </Link>
+                    <ul className="flex items-center gap-4">
+                        <li>
+                            {game?.released?.slice(0, 4)}
+                        </li>
+                        <li>
+                            {game?.genres?.map((genre: Genre) => genre.name).join(', ')}
+                        </li>
+                    </ul>
                 </div>
             </div>
         </>
