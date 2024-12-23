@@ -69,3 +69,26 @@ export const PopularCard = ({game}: { game: Game }) => {
         </>
     )
 }
+
+export const ReleasesCard = ({game}: { game: Game }) => {
+    return (
+        <>
+            <Link href={`/games/${game?.slug}`} className="relative block w-full h-96">
+                <Image src={game.background_image} fill={true} alt={game.name}/>
+            </Link>
+            <div className="py-5">
+                <Link href={`/games/${game?.slug}`} className="block text-lg transition duration-500 hover:text-main mb-3">
+                    {game?.name}
+                </Link>
+                <ul className="flex items-center text-white/60 gap-5">
+                    <li>
+                        {game?.released?.slice(0, 4)}
+                    </li>
+                    <li>
+                        {game?.genres?.map((genre: Genre) => genre.name).join(', ')}
+                    </li>
+                </ul>
+            </div>
+        </>
+    )
+}

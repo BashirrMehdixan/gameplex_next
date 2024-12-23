@@ -23,6 +23,14 @@ class Site {
             console.log(e);
         }
     }
+    public news = async () => {
+        try {
+            const response = await axios.get(`${this.api.games}/games?ordering=-added&key=${this.apiKey}`);
+            return response.data.results;
+        } catch (e) {
+            console.log(e);
+        }
+    }
 
 }
 
