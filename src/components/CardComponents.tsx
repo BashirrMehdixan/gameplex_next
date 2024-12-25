@@ -73,21 +73,29 @@ export const PopularCard = ({game}: { game: Game }) => {
 export const ReleasesCard = ({game}: { game: Game }) => {
     return (
         <>
-            <Link href={`/games/${game?.slug}`} className="relative block w-full h-96">
-                <Image src={game.background_image} fill={true} alt={game.name}/>
-            </Link>
-            <div className="py-5">
-                <Link href={`/games/${game?.slug}`} className="block text-lg transition duration-500 hover:text-main mb-3">
-                    {game?.name}
-                </Link>
-                <ul className="flex items-center text-white/60 gap-5">
-                    <li>
-                        {game?.released?.slice(0, 4)}
-                    </li>
-                    <li>
-                        {game?.genres?.map((genre: Genre) => genre.name).join(', ')}
-                    </li>
-                </ul>
+            <div className="mb-5">
+                <div className="relative block w-full h-96 group z-0">
+                    <Link href={`/games/${game?.slug}`} className="block w-full h-full">
+                        <Image src={game.background_image} fill={true} alt={game.name}/>
+                    </Link>
+                    <button
+                        className="absolute w-11/12 left-4 bottom-0 bg-white/50 py-2 z-10 transition-all duration-500 opacity-0 capitalize group-hover:opacity-100 group-hover:bottom-2  hover:bg-main">Add
+                        to my list
+                    </button>
+                </div>
+                <div className="py-5">
+                    <Link href={`/games/${game?.slug}`} className="block text-lg transition duration-500 hover:text-main mb-3">
+                        {game?.name}
+                    </Link>
+                    <ul className="flex items-center text-white/60 gap-5">
+                        <li>
+                            {game?.released?.slice(0, 4)}
+                        </li>
+                        <li>
+                            {game?.genres?.map((genre: Genre) => genre.name).join(', ')}
+                        </li>
+                    </ul>
+                </div>
             </div>
         </>
     )
